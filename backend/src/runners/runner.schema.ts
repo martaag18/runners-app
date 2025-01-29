@@ -12,13 +12,13 @@ export class Runner extends Document {
   age: number;
 
   @Prop()
-  bestTime: number; // Mejor tiempo del corredor en 5K, maratón, etc.
+  bestTime: number;
 
   @Prop()
-  totalDistance: number; // Distancia total recorrida por el corredor
+  totalDistance: number;
 
   @Prop([String])
-  eventsParticipated: string[]; // Lista de eventos en los que ha participado
+  eventsParticipated: string[];
 }
 
 export const RunnerSchema = SchemaFactory.createForClass(Runner); //SchemaFactory-->función para crear un esquema Moongose a partir de una clase (en este caso, class Runner)
