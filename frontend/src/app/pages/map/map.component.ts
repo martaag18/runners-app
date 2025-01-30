@@ -8,7 +8,6 @@ import { DatePipe } from '@angular/common';
 import { Marker } from '../../../shared/interfaces/marker.interface';
 
 
-
 @Component({
   selector: 'app-map',
   imports: [GoogleMapsModule, DatePipe],

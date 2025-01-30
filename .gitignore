@@ -3,3 +3,17 @@ node_modules/
 npm-debug.log
 dist/
 
+# Ignorar la carpeta .angular (generada por Angular CLI)
+.angular/
+
+# Ignorar dependencias generadas por Vite
+frontend/node_modules/
+
+# Ignorar archivos temporales generados por Angular
+frontend/.angular/
+
+# Ignorar archivos de build
+frontend/dist/
+
+# Ignorar archivo environment
+frontend/src/environments/environment.ts
