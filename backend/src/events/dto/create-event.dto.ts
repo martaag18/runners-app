@@ -1,13 +1,13 @@
-import { IsString, IsNumber } from 'class-validator';
+import { IsString, IsNumber, IsDate } from 'class-validator';
 
 export class CreateEventDto {
   @IsString()
   readonly name: string;
 
-  @IsNumber()
+  @IsDate()
   readonly date: Date;
 
-  @IsNumber()
+  @IsString()
   readonly description: string;
 
   @IsNumber()
