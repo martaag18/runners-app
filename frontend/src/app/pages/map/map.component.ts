@@ -5,6 +5,7 @@ import { Event } from '../../../shared/interfaces/event.interface'; // Asegúrat
 import { GoogleMapsModule } from '@angular/google-maps';
 import { inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Marker } from '../../../shared/interfaces/marker.interface';
 
 
 
@@ -24,7 +25,7 @@ export class MapComponent implements OnInit {
   googleMapsApiKey = environment.googleMapsApiKey; 
   center = {lat:0, lng:0};
   zoom = 12;
-  markers: any[] = []; 
+  markers: Marker[] = []; 
   events: Event[] = [];
 
 
