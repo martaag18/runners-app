@@ -6,8 +6,8 @@ export class Event extends Document {
   @Prop()
   name: string;
 
-  @Prop()
-  date: Date;
+  @Prop({ type: [Date, String] })
+  date: Date | string;
 
   @Prop()
   description: string;
