@@ -4,9 +4,11 @@ import { EventInput, EventClickArg } from '@fullcalendar/core'; // Importamos ta
 import { EventService } from '../../services/event.service';
 import { Event } from '../../../shared/interfaces/event.interface';
 import { inject } from '@angular/core';
-
+import { UserEventService } from '../../services/userEvent.service';
+import { CalendarOptions } from '../../../shared/interfaces/calendar.interface';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
+import { CalendarService } from '../../services/calendar.service';
 
 @Component({
   selector: 'app-calendar',
@@ -16,53 +18,34 @@ import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 })
 export class CalendarComponent implements OnInit {
 
+  private eventService = inject(EventService);
+  private userEventService = inject(UserEventService);
+  private calendarService = inject(CalendarService);
+
   eventsFromDB: Event[] = [];
   eventsFromUser: EventInput[] = [];
 
-  eventService = inject(EventService);
-
-
   ngOnInit(): void {
     this.eventService.getEvents().subscribe(events => {
-      console.log('Eventos desde la base de datos:', events);
       this.eventsFromDB = events;
+      this.updateCalendarEvents();
+    });
+  
+    this.userEventService.getAllUserEvents().subscribe(events => {
+      this.eventsFromUser = events.map(event => {
+        if (event['_id']) event.id = event['_id'];  // Asignamos el _id de MongoDB a la propiedad 'id' del evento
+        return event;
+      });
       this.updateCalendarEvents();
     });
   }
 
-  // Update events en Calendar
   updateCalendarEvents() {
-
-    if(this.eventsFromDB.length>0){
-
-      const mappedEvents = this.eventsFromDB.map((event) => {
-        return {
-          title: event.name,
-        description: event.description,
-        start: new Date(event.date),
-        lat: event.latitud,
-        lng: event.longitud,
-        allDay: true
-        }
-      })
-  
-    // Update events en Calendar Options
-    const allEvents = [...mappedEvents, ...this.eventsFromUser];
-    this.calendarOptions.events = allEvents;
-    }
+    this.calendarOptions.events = this.calendarService.updateCalendarEvents(this.eventsFromDB, this.eventsFromUser);
   }
 
   //Calendar Options
-  
-  calendarOptions: {
-    initialView: string;
-    plugins: any[];
-    events: EventInput[];
-    dateClick: (arg: DateClickArg) => void;
-    eventClick: (arg: EventClickArg) => void; 
-    editable: boolean;
-    droppable: boolean;
-  } = {
+  calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin, interactionPlugin],
     events: [], 
@@ -75,7 +58,7 @@ export class CalendarComponent implements OnInit {
   handleDateClick(arg: DateClickArg) {
     const title = prompt('Add the name of the event');
     const description = prompt('Add the description of the event');
-
+  
     if (title && description) {
       const newEvent: EventInput = {
         title,
@@ -84,21 +67,39 @@ export class CalendarComponent implements OnInit {
         allDay: true
       };
 
-      this.eventsFromUser.push(newEvent);
-      this.updateCalendarEvents();
-    }
+    // Guardar el evento en la base de datos usando el observer
+    this.userEventService.createUserEvent(newEvent).subscribe({
+      next: (createdEvent) => {
+        newEvent.id = createdEvent['_id'];
+        this.eventsFromUser.push(newEvent);
+        this.updateCalendarEvents();
+      },
+      error: (error) => {
+        console.error('Error al crear el evento:', error);
+      }
+    });
   }
+}
 
   handleEventClick(arg: EventClickArg) {
-    alert(`Event: ${arg.event.title} Description: ${arg.event.extendedProps['description']}`);
     if (confirm(`Would you like to delete "${arg.event.title}"?`)) {
-      const eventIndex = this.eventsFromUser.findIndex(event => event.title === arg.event.title);
-      if (eventIndex !== -1) {
-        this.eventsFromUser.splice(eventIndex, 1);
-        this.updateCalendarEvents();
-      }
+      const eventId = arg.event.id; 
+      
+      this.userEventService.deleteUserEvent(eventId).subscribe({
+        next: () => {
+          const eventIndex = this.eventsFromUser.findIndex(event => event.id === eventId);
+          if (eventIndex !== -1) {
+            this.eventsFromUser.splice(eventIndex, 1);  
+            this.updateCalendarEvents();  
+          }
+        },
+        error: (error) => {
+          console.error('Error al eliminar el evento:', error);
+        }
+      });
     }
   }
 }
+
 
 
