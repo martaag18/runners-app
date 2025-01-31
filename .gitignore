@@ -17,8 +17,4 @@ frontend/dist/
 
 # Ignorar archivo environment
 frontend/src/environments/environment.ts
-<<<<<<< HEAD
 
-
-=======
->>>>>>> ca096e55c77af8d28443acdc5b8df90c77f279eb

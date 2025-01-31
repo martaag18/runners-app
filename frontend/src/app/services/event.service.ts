@@ -19,6 +19,14 @@ export class EventService {
   return this.http.get<Event[]>(this.apiUrl);
  }
 
- 
+   // Guardar un nuevo evento en la base de datos
+   saveEvent(event: Event): Observable<Event> {
+    return this.http.post<Event>(this.apiUrl, event);
+  }
+
+  // Eliminar un evento en la base de datos
+  deleteEvent(event: Event): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${event.name}`);
+  }
  
 }
