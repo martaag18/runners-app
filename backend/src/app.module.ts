@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RunnerModule } from './runners/runner.module';
 import { EventModule } from './events/event.module';
+import { UserEventModule } from './usersEvents/userEvent.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { EventModule } from './events/event.module';
     }),
     RunnerModule,
     EventModule,
+    UserEventModule,
   ],
   controllers: [AppController],
   providers: [AppService],
