@@ -25,6 +25,17 @@ export class CalendarComponent implements OnInit {
   eventsFromDB: Event[] = [];
   eventsFromUser: EventInput[] = [];
 
+  //Calendar Options
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+    plugins: [dayGridPlugin, interactionPlugin],
+    events: [], 
+    dateClick: this.handleDateClick.bind(this),
+    eventClick: this.handleEventClick.bind(this),
+    editable: true,
+    droppable: true,
+  };
+
   ngOnInit(): void {
     this.eventService.getEvents().subscribe(events => {
       this.eventsFromDB = events;
@@ -44,28 +55,12 @@ export class CalendarComponent implements OnInit {
     this.calendarOptions.events = this.calendarService.updateCalendarEvents(this.eventsFromDB, this.eventsFromUser);
   }
 
-  //Calendar Options
-  calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
-    plugins: [dayGridPlugin, interactionPlugin],
-    events: [], 
-    dateClick: this.handleDateClick.bind(this),
-    eventClick: this.handleEventClick.bind(this),
-    editable: true,
-    droppable: true,
-  };
-
   handleDateClick(arg: DateClickArg) {
     const title = prompt('Add the name of the event');
     const description = prompt('Add the description of the event');
   
     if (title && description) {
-      const newEvent: EventInput = {
-        title,
-        start: arg.dateStr,
-        description,
-        allDay: true
-      };
+      const newEvent: EventInput = {title, start: arg.dateStr, description, allDay: true };
 
     // Guardar el evento en la base de datos usando el observer
     this.userEventService.createUserEvent(newEvent).subscribe({
