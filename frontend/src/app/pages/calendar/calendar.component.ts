@@ -6,9 +6,9 @@ import { Event } from '../../../shared/interfaces/event.interface';
 import { inject } from '@angular/core';
 import { UserEventService } from '../../services/userEvent.service';
 import { CalendarOptions } from '../../../shared/interfaces/calendar.interface';
+import { CalendarService } from '../../services/calendar.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
-import { CalendarService } from '../../services/calendar.service';
 
 @Component({
   selector: 'app-calendar',
@@ -70,7 +70,7 @@ export class CalendarComponent implements OnInit {
         this.updateCalendarEvents();
       },
       error: (error) => {
-        console.error('Error al crear el evento:', error);
+        console.error('Error creating event:', error);
       }
     });
   }
@@ -79,17 +79,14 @@ export class CalendarComponent implements OnInit {
   handleEventClick(arg: EventClickArg) {
     if (confirm(`Would you like to delete "${arg.event.title}"?`)) {
       const eventId = arg.event.id; 
-      
       this.userEventService.deleteUserEvent(eventId).subscribe({
         next: () => {
           const eventIndex = this.eventsFromUser.findIndex(event => event.id === eventId);
-          if (eventIndex !== -1) {
-            this.eventsFromUser.splice(eventIndex, 1);  
-            this.updateCalendarEvents();  
-          }
+          this.eventsFromUser.splice(eventIndex, 1);  
+          this.updateCalendarEvents();  
         },
         error: (error) => {
-          console.error('Error al eliminar el evento:', error);
+          console.error('Error deleting event:', error);
         }
       });
     }

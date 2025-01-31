@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EventInput } from '@fullcalendar/core';
-import { Event
-    
- } from '../../shared/interfaces/event.interface';
+import { Event } from '../../shared/interfaces/event.interface';
+
 @Injectable({
   providedIn: 'root'
 })
