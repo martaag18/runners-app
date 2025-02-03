@@ -19,7 +19,7 @@ export class RunnerService {
   return this.http.get<Runner[]>(this.apiUrl);
  }
 
- calcAgeGroupStats(runners: Runner[]): {
+calcAgeGroupStats(runners: Runner[]): {
   labels: string[];
   avgBestTimes: number[];
   avgDistances: number[];
@@ -45,7 +45,7 @@ export class RunnerService {
 
   // 2) Clasificar cada corredor
   runners.forEach(runner => {
-    const group = ageRanges.find(r => runner.age >= r.min && runner.age <= r.max);
+    const group = ageRanges.find(range => runner.age >= range.min && runner.age <= range.max);
     if (group) {
       groups[group.label].totalBestTime += runner.bestTime;
       groups[group.label].totalDistance += runner.totalDistance;
