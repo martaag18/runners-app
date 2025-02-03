@@ -34,6 +34,8 @@ export class CalendarComponent implements OnInit {
     eventClick: this.handleEventClick.bind(this),
     editable: true,
     droppable: true,
+    displayEventTime: false,
+
   };
 
   ngOnInit(): void {
@@ -43,8 +45,10 @@ export class CalendarComponent implements OnInit {
     });
   
     this.userEventService.getAllUserEvents().subscribe(events => {
+      console.log("Events from user", events);
       this.eventsFromUser = events.map(event => {
-        if (event['_id']) event.id = event['_id'];  // Asignamos el _id de MongoDB a la propiedad 'id' del evento
+        if (event['_id']) event.id = event['_id']; // Asignamos el _id de MongoDB a la propiedad 'id' del evento
+        if (!event.title) event.title = event['name'] || 'No Title'; 
         return event;
       });
       this.updateCalendarEvents();
@@ -60,12 +64,11 @@ export class CalendarComponent implements OnInit {
     const description = prompt('Add the description of the event');
   
     if (title && description) {
-      const newEvent: EventInput = {title, start: arg.dateStr, description, allDay: true };
+      const newEvent: EventInput = {title: title, start: arg.dateStr, description: description, allDay: true };
 
-    // Guardar el evento en la base de datos usando el observer
     this.userEventService.createUserEvent(newEvent).subscribe({
       next: (createdEvent) => {
-        newEvent.id = createdEvent['_id'];
+        newEvent.id = createdEvent['_id']; //Asignamos el id que nos da el backend
         this.eventsFromUser.push(newEvent);
         this.updateCalendarEvents();
       },
@@ -77,6 +80,7 @@ export class CalendarComponent implements OnInit {
 }
 
   handleEventClick(arg: EventClickArg) {
+    alert(`Title: ${arg.event.title}, Description: ${arg.event.extendedProps['description']}`);
     if (confirm(`Would you like to delete "${arg.event.title}"?`)) {
       const eventId = arg.event.id; 
       this.userEventService.deleteUserEvent(eventId).subscribe({

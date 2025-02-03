@@ -9,4 +9,6 @@ export interface CalendarOptions {
     eventClick: (arg: EventClickArg) => void; 
     editable: boolean;
     droppable: boolean;
+    displayEventTime: boolean;
+
   }
