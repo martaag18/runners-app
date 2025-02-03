@@ -13,23 +13,23 @@ import { UserEvent } from './userEvent.schema';
 
 @Controller('user-events')
 export class UserEventController {
-  constructor(private readonly eventService: UserEventService) {}
+  constructor(private readonly userEventService: UserEventService) {}
 
   @Post()
   async createUserEvent(
     @Body() createUserEventDto: CreateUserEventDto,
   ): Promise<UserEvent> {
-    return this.eventService.createUserEvent(createUserEventDto);
+    return this.userEventService.createUserEvent(createUserEventDto);
   }
 
   @Get()
   async getAllUserEvents(): Promise<UserEvent[]> {
-    return this.eventService.getAllUserEvents();
+    return this.userEventService.getAllUserEvents();
   }
 
   @Get(':id')
   async getUserEventById(@Param('id') id: string): Promise<UserEvent | null> {
-    return this.eventService.getUserEventById(id);
+    return this.userEventService.getUserEventById(id);
   }
 
   @Put(':id')
@@ -37,11 +37,12 @@ export class UserEventController {
     @Param('id') id: string,
     @Body() updateUserEventDto: CreateUserEventDto,
   ): Promise<UserEvent | null> {
-    return this.eventService.updateUserEvent(id, updateUserEventDto);
+    return this.userEventService.updateUserEvent(id, updateUserEventDto);
   }
 
   @Delete(':id')
   async deleteUserEvent(@Param('id') id: string): Promise<void> {
-    return this.eventService.deleteUserEvent(id);
+    console.log('Eliminando evento con _id:', id); // Verifica que el ID se recibe correctamente
+    return this.userEventService.deleteUserEvent(id);
   }
 }

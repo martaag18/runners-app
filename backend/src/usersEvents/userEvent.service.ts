@@ -15,8 +15,8 @@ export class UserEventService {
   async createUserEvent(
     createUserEventDto: CreateUserEventDto,
   ): Promise<UserEvent> {
-    const createdEvent = new this.userEventModel(createUserEventDto);
-    return createdEvent.save();
+    const createdUserEvent = new this.userEventModel(createUserEventDto);
+    return createdUserEvent.save();
   }
 
   // Get user event
@@ -40,7 +40,9 @@ export class UserEventService {
   }
 
   // Delete user event
+  // Método para eliminar un evento usando su ID
   async deleteUserEvent(id: string): Promise<void> {
-    await this.userEventModel.findByIdAndDelete(id).exec();
+    console.log('Eliminando evento en la base de datos con _id:', id); // Verifica que el ID se usa correctamente
+    await this.userEventModel.deleteOne({ _id: id }).exec(); // Usamos _id de MongoDB
   }
 }
