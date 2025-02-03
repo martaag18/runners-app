@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { RunnerService } from '../../../services/runner.service';
 import { inject } from '@angular/core';
 import { ChartData, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { ChartService } from '../../../services/chart.service';
 
 @Component({
   selector: 'app-line-chart',
@@ -12,7 +12,7 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class LineChartComponent {
 
-  private runnerService = inject(RunnerService);
+  private chartService = inject(ChartService);
 
   public lineChartType: "line" = "line";
 
@@ -33,9 +33,9 @@ export class LineChartComponent {
   };
 
   ngOnInit(): void {
-    this.runnerService.getRunners().subscribe({
+    this.chartService.getRunners().subscribe({
       next: (runners) => {
-        const { labels, avgBestTimes, avgDistances } = this.runnerService.calcAgeGroupStats(runners);
+        const { labels, avgBestTimes, avgDistances } = this.chartService.calcAgeGroupStats(runners);
   
         this.lineChartData = {
           labels,

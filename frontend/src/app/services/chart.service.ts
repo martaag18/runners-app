@@ -8,7 +8,7 @@ import { AgeGroupStats } from '../../shared/runner.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class RunnerService {
+export class ChartService {
 
   private apiUrl = 'http://localhost:3000/runners';
   private http = inject(HttpClient)

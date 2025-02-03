@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { BaseChartDirective } from "ng2-charts";
 import { ChartData, ChartOptions } from "chart.js";
-import { RunnerService } from "../../../services/runner.service";
+import { ChartService } from "../../../services/chart.service";
 import { inject } from "@angular/core";
 
 @Component({
@@ -12,7 +12,7 @@ import { inject } from "@angular/core";
   styleUrls: ["./bar-chart.component.css"],
 })
 export class BarChartComponent implements OnInit {
-  private runnerService = inject(RunnerService);
+  private chartService = inject(ChartService);
 
   public barChartType: "bar" = "bar";
 
@@ -33,9 +33,9 @@ export class BarChartComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.runnerService.getRunners().subscribe({
+    this.chartService.getRunners().subscribe({
       next: (runners) => {
-        const { labels, avgBestTimes, avgDistances } = this.runnerService.calcAgeGroupStats(runners);
+        const { labels, avgBestTimes, avgDistances } = this.chartService.calcAgeGroupStats(runners);
   
         this.barChartData = {
           labels,
