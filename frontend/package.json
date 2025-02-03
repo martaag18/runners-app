@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"  },
+    "test": "ng test"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.0.0",
@@ -25,9 +26,11 @@
     "@fullcalendar/interaction": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
     "@googlemaps/js-api-loader": "^1.16.8",
+    "chart.js": "^4.4.7",
     "daisyui": "^4.12.23",
     "express": "^4.18.2",
     "leaflet": "^1.7.1",
+    "ng2-charts": "^8.0.0",
     "primeicons": "^7.0.0",
     "primeng": "^19.0.5",
     "rxjs": "~7.8.0",

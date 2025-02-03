@@ -4,6 +4,8 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+
 
 
 export const appConfig: ApplicationConfig = {
@@ -15,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: 'googleMapsApiKey',
       useValue: environment.googleMapsApiKey
-    } 
+    },
+    provideCharts(withDefaultRegisterables()),
   ],
 };
