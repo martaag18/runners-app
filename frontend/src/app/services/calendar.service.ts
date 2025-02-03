@@ -21,16 +21,24 @@ export class CalendarService {
               lat: event.latitud,
               lng: event.longitud,
               allDay: true,
-              color: "blue",
+              classNames: [
+                'text-lg',
+                'text-wrap',
+                'bg-tertiary',         
+                'border-none',
+              ] 
             };
           }),
           ...eventsFromUser.map((eventUser) => {
             return {
               ...eventUser,
               allDay: true,               
-              backgroundColor: 'green',  
-              borderColor: 'green',      
-              textColor: 'white',        
+              classNames: [
+                'text-lg',
+                'text-wrap',
+                'bg-primary',         
+                'border-none',
+              ]   
             };
           })
         ];
