@@ -59,11 +59,11 @@ calcAgeGroupStats(runners: Runner[]): {
   const avgDistances: number[] = [];
 
   for (const range of ageRanges) {
-    const stats = groups[range.label];
-    if (stats.count > 0) {
-      labels.push(`${range.label} (${stats.count} runners)`);
-      avgBestTimes.push(stats.totalBestTime / stats.count);
-      avgDistances.push(stats.totalDistance / stats.count);
+    const groupData = groups[range.label];
+    if (groupData.count > 0) {
+      labels.push(`${range.label} (${groupData.count} runners)`);
+      avgBestTimes.push(groupData.totalBestTime / groupData.count);
+      avgDistances.push(groupData.totalDistance / groupData.count);
     }
   }
 

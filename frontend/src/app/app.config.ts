@@ -5,6 +5,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideHttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 
@@ -18,6 +19,6 @@ export const appConfig: ApplicationConfig = {
       provide: 'googleMapsApiKey',
       useValue: environment.googleMapsApiKey
     },
-    provideCharts(withDefaultRegisterables()),
+    provideCharts(withDefaultRegisterables()), provideAnimationsAsync(),
   ],
 };

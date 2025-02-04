@@ -29,4 +29,12 @@ export class UserEventService {
   deleteUserEvent(eventId: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${eventId}`); 
   }
+
+  // Actualiza eventUser (PUT)
+  updateUserEvent(eventId: string, event: EventInput): Observable<any> {
+  return this.http.put(`${this.apiUrl}/${eventId}`, {
+    name: event.title,
+    description: event['description']
+  });
+}
 }

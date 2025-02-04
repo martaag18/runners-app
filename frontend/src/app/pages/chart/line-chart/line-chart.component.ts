@@ -42,12 +42,12 @@ export class LineChartComponent {
           datasets: [
             {
               data: avgBestTimes,
-              label: "Avg bestTime",
+              label: "Avg bestTime (min/km)",
               backgroundColor: "#FF9800",
             },
             {
               data: avgDistances,
-              label: "Avg totalDistance",
+              label: "Avg totalDistance (km)",
               backgroundColor: "#fb7185",
             },
           ],

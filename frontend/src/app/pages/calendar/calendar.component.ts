@@ -9,6 +9,8 @@ import { CalendarOptions } from '../../../shared/interfaces/calendar.interface';
 import { CalendarService } from '../../services/calendar.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
+import { MatDialog } from '@angular/material/dialog';
+import { EditEventData, PopUpComponent } from './pop-up/pop-up.component';
 
 @Component({
   selector: 'app-calendar',
@@ -18,9 +20,12 @@ import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 })
 export class CalendarComponent implements OnInit {
 
+
   private eventService = inject(EventService);
   private userEventService = inject(UserEventService);
   private calendarService = inject(CalendarService);
+  private dialog: MatDialog = inject(MatDialog); 
+
 
   eventsFromDB: Event[] = [];
   eventsFromUser: EventInput[] = [];
@@ -68,7 +73,6 @@ export class CalendarComponent implements OnInit {
 
     this.userEventService.createUserEvent(newEvent).subscribe({
       next: (createdEvent) => {
-        newEvent.id = createdEvent['_id']; //Asignamos el id que nos da el backend
         this.eventsFromUser.push(newEvent);
         this.updateCalendarEvents();
       },
@@ -78,10 +82,42 @@ export class CalendarComponent implements OnInit {
     });
   }
 }
-
   handleEventClick(arg: EventClickArg) {
     alert(`Title: ${arg.event.title}, Description: ${arg.event.extendedProps['description']}`);
-    if (confirm(`Would you like to delete "${arg.event.title}"?`)) {
+
+     if (confirm(`Would you like to edit ${arg.event.title}?`)) {
+      // Preparamos los datos para el diálogo
+      const eventData: EditEventData = {
+        id: arg.event.id,
+        title: arg.event.title,
+        description: arg.event.extendedProps['description'],
+      };
+
+      // Abrir el diálogo de edición
+      const dialogRef = this.dialog.open(PopUpComponent, {
+        width: '400px',
+        data: eventData
+      });
+
+      // Después de cerrar el diálogo, se recibe la data actualizada (si se guardó)
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.userEventService.updateUserEvent(result.id, result).subscribe({
+            next: (updatedEvent) => {
+        
+              // Actualizamos el array eventsFromUser con los nuevos datos
+              const index = this.eventsFromUser.findIndex(event => event.id === result.id);
+              if (index !== -1) {
+                this.eventsFromUser[index].title = result.title;
+                this.eventsFromUser[index]['description'] = result.description;
+              }
+              this.updateCalendarEvents();
+            },
+            error: (err) => console.error('Error updating event:', err)
+          });
+        }
+      });
+    } else if (confirm(`Would you like to delete "${arg.event.title}"?`)) {
       const eventId = arg.event.id; 
       this.userEventService.deleteUserEvent(eventId).subscribe({
         next: () => {
