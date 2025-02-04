@@ -12,3 +12,9 @@ export interface CalendarOptions {
     displayEventTime: boolean;
 
   }
+
+export interface EditEventData {
+    id: string;
+    title: string;
+    description: string;
+  }

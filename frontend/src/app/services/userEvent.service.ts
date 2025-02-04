@@ -42,7 +42,10 @@ export class UserEventService {
     return events.map((event) => {
       if (event["_id"]) event.id = event["_id"];
       if (!event.title) event.title = event["name"] || "No Title";
-      return event;
+      return {
+        ...event,
+        isFromUser: true,
+      }
     });
   }
 }

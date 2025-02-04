@@ -1,18 +1,22 @@
-<h2 mat-dialog-title>Editar Evento</h2>
-<mat-dialog-content>
-  <mat-form-field appearance="fill" class="w-full">
-    <mat-label>Título</mat-label>
-    <input matInput [(ngModel)]="data.title" />
-  </mat-form-field>
+<div class="p-4">
+  <h2 mat-dialog-title>Editar Evento</h2>
   
-  <mat-form-field appearance="fill" class="w-full">
-    <mat-label>Descripción</mat-label>
-    <textarea matInput [(ngModel)]="data.description"></textarea>
-  </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button (click)="onCancel()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Guardar</button>
-</mat-dialog-actions>
+  <mat-dialog-content>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="font-bold">Título</mat-label>
+      <input matInput [(ngModel)]="data.title" />
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label class="font-bold">Descripción</mat-label>
+      <textarea matInput [(ngModel)]="data.description"></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button (click)="onCancel()" class="btn bg-primary text-white text-lg hover:bg-tertiary">Cancel</button>
+    <button [mat-dialog-close]="data" cdkFocusInitial class="btn bg-primary text-white text-lg hover:bg-tertiary">Save</button>
+  </mat-dialog-actions>
+</div>
+
 
 

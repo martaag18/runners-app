@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { EventInput } from '@fullcalendar/core';
 import { Event } from '../../shared/interfaces/event.interface';
+import { CalendarOptions } from '../../shared/interfaces/calendar.interface';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+
 
 @Injectable({
   providedIn: 'root'
@@ -46,4 +50,20 @@ export class CalendarService {
         console.log('Eventos actualizados:', updatedEvents);
         return updatedEvents;
       }
+
+      getCalendarOptions(
+        dateClickHandler: (arg: any) => void,
+        eventClickHandler: (arg: any) => void
+      ): CalendarOptions {
+        return {
+          initialView: "dayGridMonth",
+          plugins: [dayGridPlugin, interactionPlugin],
+          events: [],
+          dateClick: dateClickHandler, 
+          eventClick: eventClickHandler, 
+          editable: true,
+          droppable: true,
+          displayEventTime: false,
+        };
+      }  
 }
