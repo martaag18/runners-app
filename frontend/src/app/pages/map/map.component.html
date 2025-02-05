@@ -1,11 +1,12 @@
-<div class="flex flex-col mt-10 ml-5">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4 ml-4">
   <!-- Mapa -->
-  <div class="flex">
-    <div class="map"> 
+  <div class="order-1 md:order-none md:col-span-3">
+    <div class="mb-4">
       <google-map
         [center]="center"
         [zoom]="zoom"
-        [options]="{ mapTypeId: 'roadmap' }">
+        [options]="{ mapTypeId: 'roadmap' }"
+        class="w-full h-96">
         @for(marker of markers; track $index) {
           <map-marker [position]="marker.position" [title]="marker.title"></map-marker>
         }
@@ -13,21 +14,43 @@
     </div>
   </div>
 
-  <!-- Cards -->
-  <div class="flex mr-5 mt-5 mb-5">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
+  <!-- Checkboxes -->
+  <div class="flex justify-center order-2 w-1/2 md:order-none md:col-span-1">
+    <div class="form-control flex flex-col gap-4">
+      <label class="cursor-pointer label">
+        <span class="label-text title text-xl">Events</span>
+        <input type="checkbox" class="checkbox checkbox-secondary ml-8"/>
+      </label>
+      <label class="cursor-pointer label">
+        <span class="label-text title text-xl">Info Points</span>
+        <input type="checkbox" class="checkbox checkbox-secondary ml-8 "/>
+      </label>
+      <label class="cursor-pointer label">
+        <span class="label-text title text-xl">All</span>
+        <input type="checkbox" class="checkbox checkbox-secondary ml-8 "/>
+      </label>
+    </div>
+  </div>
+
+  <!-- Cards de eventos  -->
+  <div class="order-3 md:order-none md:col-span-3 mb-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       @if(events.length > 0){
         @for(event of events; track $index) {
-          <div class="flex card shadow-xl border border-primary hover:text-primary cursor-pointer p-4"> 
-            <h1 class="card-title">{{ event.name }}</h1>
+          <div class="card shadow-xl border border-primary hover:text-primary cursor-pointer p-4">
+            <h1 class="card-title title">{{ event.name }}</h1>
             <h3><b>Date:</b> {{ event.date | date: 'dd/MM/yyyy' }}</h3>
-            <h3><b>Description:</b> {{ event.description }}</h3>  
+            <h3><b>Description:</b> {{ event.description }}</h3>
           </div>
         }
       }
     </div>
   </div>
 </div>
+
+ 
+
+
 
 
 
