@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { EventService } from '../../services/event.service'; // Asegúrate de importar el servicio de eventos
 import { Event } from '../../../shared/interfaces/event.interface'; // Asegúrate de que la interfaz esté bien importada
@@ -26,19 +26,18 @@ export class MapComponent implements OnInit {
   private checkboxSerive = inject(CheckboxService);
   
 
-
   googleMapsApiKey = environment.googleMapsApiKey; 
   center = {lat:0, lng:0};
   zoom = 12;
+  
   markers: Marker[] = []; 
   markersEvents: Marker[] = [];
   markersInfoPoints: Marker[] = [];
-  events: Event[] = [];
+  events = signal<Event[]>([]);
 
-   // Estado de los checkboxes (por defecto se muestran ambos)
-   showEvents: boolean = true;
-   showInfoPoints: boolean = true;
-   showAll: boolean = false;
+  showEvents: boolean = true;
+  showInfoPoints: boolean = true;
+  showAll: boolean = false;
 
 
   ngOnInit() {
@@ -81,14 +80,14 @@ export class MapComponent implements OnInit {
 
   private loadEvents(){
     this.eventService.getEvents().subscribe((events: Event[]) => {
-      const newEvents = events.map(event => ({
+      console.log("events to html", events)
+      this.events.set(events.map(event => ({
         name: event.name,
         date: event.date,
         description: event.description,
         latitud: event.latitud,
         longitud: event.longitud,
-      }));
-      this.events.push(...newEvents);
+      })));
     })
   }
 
