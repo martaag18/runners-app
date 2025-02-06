@@ -1,1 +1,99 @@
-<p>signup works!</p>
+
+<div class="flex flex-col justify-center">  
+  <div class="flex flex-col">
+    <div class="flex justify-end me-10 mt-10">
+      <a routerLink="/" class="btn btn-circle bg-primary text-white hover:bg-tertiary"> ✖ </a>
+    </div>
+    <!-- Form -->
+    <form [formGroup] = "registerForm" (ngSubmit)="submitRegister()">
+        <div class="flex justify-center mb-10">
+            <div class="card bg-white w-full max-w-[520px] md:max-w-[620px] p-6 lg:p-8 rounded-3xl shadow-xl">
+              <h2 class="text-center text-2xl font-bold mb-4 text-primary title">Enter your details to register:</h2>
+              <label class="block w-full mb-4">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  formControlName="name" 
+                  class="form-control" 
+                  class="input input-bordered h-12 px-4 text-base bg-gray-100 rounded-md"
+                />
+                @if(registerForm.get('name')?.invalid && registerForm.get('name')?.touched){
+                    <div class="error-messages">
+                        @if (registerForm.get('name')?.errors?.['required']) {
+                          <span class="text-red-600 font-bold">Must be a name</span>
+                        }
+                    </div>
+                }
+            </label>
+              <label class="block w-full mb-4">
+                <input
+                    type="text"
+                    placeholder="Surname"
+                    formControlName="surname" 
+                    class="form-control" 
+                    class="input input-bordered h-12 px-4 text-base bg-gray-100 rounded-md"
+                />
+                @if(registerForm.get('surname')?.invalid && registerForm.get('surname')?.touched){
+                    <div class="error-messages">
+                        @if (registerForm.get('surname')?.errors?.['required']) {
+                          <span class="text-red-600 font-bold">Must be a surname</span>
+                        }
+                    </div>
+                }
+              </label>
+              <label class="block w-full mb-4">
+                <input
+                  type="text"
+                  placeholder="Email"
+                  formControlName="email" 
+                  class="form-control" 
+                  class="input input-bordered h-12 px-4 text-base bg-gray-100 rounded-md"
+                />
+                @if(registerForm.get('email')?.invalid && registerForm.get('email')?.touched){
+                    <div class="error-messages">
+                        @if (registerForm.get('email')?.errors?.['required']) {
+                          <span class="text-red-600 font-bold">Must be an email</span>
+                        }
+                        @if (registerForm.get('email')?.errors?.['email']){
+                            <span class="text-red-600 font-bold">Must be email format</span> 
+                        }
+                    </div>
+                }
+              </label>
+              <label class="block w-full mb-4">
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    formControlName="password" 
+                    class="form-control" 
+                    class="input input-bordered h-12 px-4 text-base bg-gray-100 rounded-md"
+                  />
+                @if(registerForm.get('password')?.invalid && registerForm.get('password')?.touched){
+                    <div class="error-messages">
+                        @if (registerForm.get('password')?.errors?.['required']) {
+                          <span class="text-red-600 font-bold">Must be a password</span>
+                        }
+                    </div>
+                }
+              </label>
+              <label class="block w-full mb-4">
+                  <input
+                    type="password"
+                    placeholder="Repeat Password"
+                    formControlName="repeatPassword" 
+                    class="form-control" 
+                    class="input input-bordered h-12 px-4 text-base bg-gray-100 rounded-md"
+                />
+                @if(registerForm.get('password')?.invalid && registerForm.get('password')?.touched){
+                    <div class="error-messages">
+                        @if (registerForm.get('password')?.errors?.['required']) {
+                          <span class="text-red-600 font-bold">Must be a password</span>
+                        }
+                    </div>
+                }
+              </label>  
+              <button type="submit" class="btn bg-tertiary hover:bg-primary text-white text-xl title font-bold  mb-4"> Sign Up Now!</button>
+            </div>
+          </div>
+    </form>
+  </div>
