@@ -8,11 +8,12 @@ import { DatePipe } from '@angular/common';
 import { Marker } from '../../../shared/interfaces/marker.interface';
 import { InfoPoint } from '../../../shared/interfaces/infoPoint.interface';
 import { InfoPointService } from '../../services/infoPoint.service';
-
+import { FormsModule } from '@angular/forms';
+import { CheckboxService } from '../../services/checkbox.service';
 
 @Component({
   selector: 'app-map',
-  imports: [GoogleMapsModule, DatePipe],
+  imports: [GoogleMapsModule, DatePipe, FormsModule],
   providers: [DatePipe], 
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
@@ -22,6 +23,7 @@ export class MapComponent implements OnInit {
   private eventService = inject(EventService)
   private datePipe = inject(DatePipe);
   private infoPointService = inject(InfoPointService);
+  private checkboxSerive = inject(CheckboxService);
   
 
 
@@ -33,13 +35,19 @@ export class MapComponent implements OnInit {
   markersInfoPoints: Marker[] = [];
   events: Event[] = [];
 
+   // Estado de los checkboxes (por defecto se muestran ambos)
+   showEvents: boolean = true;
+   showInfoPoints: boolean = true;
+   showAll: boolean = false;
+
 
   ngOnInit() {
-    this.loadEvents(); 
-    this.loadInfoPoints();
+    this.loadEventsMarkers(); 
+    this.loadInfoPointsMarkers();
+    this.loadEvents();
   }
 
-  private loadEvents(): void {
+  private loadEventsMarkers(): void {
     this.eventService.getEvents().subscribe((events: Event[]) => {
       console.log('Events received:', events);
 
@@ -50,22 +58,12 @@ export class MapComponent implements OnInit {
           position: { lat: event.latitud, lng: event.longitud },
           title: event.name
         }));
-        this.updateMarkers();
-        // Add events to array
-        const newEvents = events.map(event => ({
-          name: event.name,
-          date: event.date,
-          description: event.description,
-          latitud: event.latitud,
-          longitud: event.longitud,
-        }));
-
-        this.events.push(...newEvents);
+        this.onCheckBoxChange();
       }
     });
   }
 
-  private loadInfoPoints(): void {
+  private loadInfoPointsMarkers(): void {
     this.infoPointService.getInfoPoints().subscribe((infoPoints: InfoPoint[]) => {
       console.log('Info points received', infoPoints);
 
@@ -76,15 +74,33 @@ export class MapComponent implements OnInit {
           position: { lat: infoPoint.latitud, lng: infoPoint.longitud },
           title: infoPoint.name
         }));
-        this.updateMarkers();
+        this.onCheckBoxChange();
       }
     })
   }
 
-  private updateMarkers(): void {
-    this.markers = [...this.markersEvents, ...this.markersInfoPoints];
+  private loadEvents(){
+    this.eventService.getEvents().subscribe((events: Event[]) => {
+      const newEvents = events.map(event => ({
+        name: event.name,
+        date: event.date,
+        description: event.description,
+        latitud: event.latitud,
+        longitud: event.longitud,
+      }));
+      this.events.push(...newEvents);
+    })
   }
-  
+
+  onCheckBoxChange(): void {
+    this.markers = this.checkboxSerive.filterMarkers({
+      showAll: this.showAll,
+      showEvents: this.showEvents,
+      showInfoPoints: this.showInfoPoints,
+      markersEvents: this.markersEvents,
+      markersInfoPoints: this.markersInfoPoints,
+    })
+  }
 }
 
 

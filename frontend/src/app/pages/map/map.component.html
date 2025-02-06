@@ -21,15 +21,15 @@
       <div class="form-control flex flex-col gap-4">
         <label class="flex items-center cursor-pointer label">
           <span class="label-text title text-xl">Events</span>
-          <input type="checkbox" class="checkbox checkbox-secondary ml-2"/>
+          <input type="checkbox" class="checkbox checkbox-secondary ml-2" [(ngModel)]="showEvents" (change)="onCheckBoxChange()"/>
         </label>
         <label class="flex items-center cursor-pointer label">
           <span class="label-text title text-xl">Info Points</span>
-          <input type="checkbox" class="checkbox checkbox-secondary ml-2"/>
+          <input type="checkbox" class="checkbox checkbox-secondary ml-2" [(ngModel)]="showInfoPoints" (change)="onCheckBoxChange()"/>
         </label>
         <label class="flex items-center cursor-pointer label">
           <span class="label-text title text-xl">All</span>
-          <input type="checkbox" class="checkbox checkbox-secondary ml-2"/>
+          <input type="checkbox" class="checkbox checkbox-secondary ml-2" [(ngModel)]="showAll" (change)="onCheckBoxChange()"/>
         </label>
       </div>
     </div>
