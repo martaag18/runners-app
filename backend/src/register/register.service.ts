@@ -7,7 +7,6 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class RegisterService {
-  //inyectamos modelo de Mongoose(RegisterDocument) para poder interactuar con la base de datos del servicio (findOne, save, updateOne)
   constructor(
     @InjectModel(Register.name) private registerModel: Model<RegisterDocument>,
   ) {}
@@ -16,20 +15,19 @@ export class RegisterService {
     const { name, surname, email, password, repeatPassword } =
       createRegisterDto;
 
-    // Verificar que las contraseñas coincidan
     if (password !== repeatPassword) {
       throw new BadRequestException('Passwords do not match');
     }
-    // Verificar si el email ya está registrado
+
     const existingUser = await this.registerModel.findOne({ email }).exec();
     if (existingUser) {
       throw new BadRequestException('Email already in use');
     }
-    // Hashear la contraseña
+
+    // Genera el hash de la contraseña usando bcrypt
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Crear el usuario
     const newUser = new this.registerModel({
       name,
       surname,

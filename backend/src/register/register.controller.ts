@@ -1,7 +1,7 @@
 import {
-  Body,
   Controller,
   Post,
+  Body,
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
@@ -15,10 +15,10 @@ export class RegisterController {
   @Post()
   async registerUser(
     @Body() createRegisterDto: CreateRegisterDto,
-  ): Promise<string> {
+  ): Promise<{ message: string }> {
     try {
       await this.registerService.createUser(createRegisterDto);
-      return 'User registered successfully';
+      return { message: 'User registered successfully' };
     } catch (error) {
       throw new HttpException((error as Error).message, HttpStatus.BAD_REQUEST);
     }
