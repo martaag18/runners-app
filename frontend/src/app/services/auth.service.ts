@@ -1,20 +1,38 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Register } from '../../shared/interfaces/register.interface';
-
+import { inject } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
 
-  private API_URL = 'http://localhost:3000/register';
+  private API_URL = 'http://localhost:3000/auth/login';
   private http = inject(HttpClient);
 
-  registerUser(data: Register) : Observable< {message: string }>{
-    return this.http.post<{ message: string }>(this.API_URL, data);
+  isLoggedSignal = signal(!!localStorage.getItem('token')); //!!->devolver valor boolean
+
+
+  login(data: { email: string; password: string }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(this.API_URL, data);
   }
 
+  setToken(token: string): void {
+    localStorage.setItem('token', token);
+    this.isLoggedSignal.set(true);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.isLoggedSignal.set(false);
+
+  }
 }
+
+
+

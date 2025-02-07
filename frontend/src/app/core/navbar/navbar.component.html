@@ -9,7 +9,11 @@
     </div>
     <!-- Authentication -->
     <div class="hidden lg:flex gap-4">
+    @if(authService.isLoggedSignal()){
+      <a class="title-link text-lg font-bold  text-gray-600  hover:text-primary px-4 py-2 rounded-lg cursor-pointer" (click)="logout()"><i class="fas fa-user mr-4"></i>LOG OUT</a>
+    } @else {
       <a routerLink="/login" class="title-link text-lg font-bold  text-gray-600  hover:text-primary px-4 py-2 rounded-lg cursor-pointer"><i class="fas fa-user mr-4"></i>LOG IN</a>
+    }
       <a routerLink="/signup" class="title-link text-lg font-bold text-gray-600 hover:text-primary  px-4 py-2 rounded-lg cursor-pointer"><i class="fas fa-user mr-4"></i> SIGN UP</a>
     </div>
     <!-- Menú hamburguesa para pantallas pequeñas -->

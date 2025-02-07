@@ -1,0 +1,58 @@
+<div class="flex flex-col justify-center">  
+    <div class="flex flex-col">
+      <div class="flex justify-end me-10 mt-10">
+        <a routerLink="/" class="btn btn-circle bg-primary text-white hover:bg-tertiary"> ✖ </a>
+      </div>
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+        <div class="flex justify-center mb-10">
+          <div class="card bg-white w-full max-w-[520px] md:max-w-[620px] p-6 lg:p-8 rounded-3xl shadow-xl">
+            <h2 class="text-center text-2xl font-bold mb-4 text-primary title">Login to Your Account</h2>
+  
+            <!-- Email Field -->
+            <label class="block w-full mb-4">
+              <input
+                type="text"
+                placeholder="Email"
+                formControlName="email" 
+                class="form-control input input-bordered h-12 px-4 text-base bg-gray-100 rounded-md"
+              />
+              @if(loginForm.get('email')?.invalid && loginForm.get('email')?.touched){
+                <div class="error-messages">
+                  @if(loginForm.get('email')?.errors?.['required']){
+                    <span class="text-red-600 font-bold">Email is required</span>
+                  }
+                  @if(loginForm.get('email')?.errors?.['email']){
+                    <span class="text-red-600 font-bold">Invalid email format</span>
+                  }
+                </div>
+              }
+            </label>
+  
+            <!-- Password Field -->
+            <label class="block w-full mb-4">
+              <input
+                type="password"
+                placeholder="Password"
+                formControlName="password" 
+                class="form-control input input-bordered h-12 px-4 text-base bg-gray-100 rounded-md"
+              />
+              @if(loginForm.get('password')?.invalid && loginForm.get('password')?.touched){
+                <div class="error-messages">
+                  @if(loginForm.get('password')?.errors?.['required']){
+                    <span class="text-red-600 font-bold">Password is required</span>
+                  }
+                </div>
+              }
+            </label>
+  
+            <!-- Submit Button -->
+            <button type="submit" class="btn bg-tertiary hover:bg-primary text-white text-xl title font-bold mb-4">
+              Login
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

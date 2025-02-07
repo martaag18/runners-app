@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Register } from '../../../../shared/interfaces/register.interface';
-import { AuthService } from '../../../services/auth.service';
 import { inject } from '@angular/core';
+import { SignUpService } from '../../../services/signUp.service';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { inject } from '@angular/core';
 })
 export class SignupComponent {
 
-  private authService = inject(AuthService)
+  private signUp = inject(SignUpService)
 
   registerForm = new FormGroup({
     name: new FormControl("", [Validators.required]),
@@ -34,7 +34,7 @@ export class SignupComponent {
         repeatPassword: this.registerForm.value.repeatPassword!,
       };
 
-      this.authService.registerUser(user).subscribe({
+      this.signUp.registerUser(user).subscribe({
         next: (response) => {
           console.log("User successfully registered", response.message);
           alert('Registration successful');
