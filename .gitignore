@@ -15,6 +15,5 @@ frontend/.angular/
 # Ignorar archivos de build
 frontend/dist/
 
-# Ignorar archivo environment
-frontend/src/environments/environment.ts
+
 
