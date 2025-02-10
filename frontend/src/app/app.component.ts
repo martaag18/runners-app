@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { FooterComponent } from './core/footer/footer.component';
-import { environment } from '../environments/environment'; // Importa el archivo de entorno
+import { environment } from '../environments/environment'; 
 import { isPlatformBrowser } from '@angular/common'; // Importa isPlatformBrowser
 
 @Component({
