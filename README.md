@@ -1,6 +1,6 @@
 # 🚀 Plugins Integration Project with Angular & NestJS API
 
-## Description
+## 📄Description
 The goal of this sprint is to explore and integrate various plugins often required by clients in professional projects. In this project, you'll build a full-stack application with an Angular frontend and a NestJS API backend using MongoDB for data storage. The application integrates plugins for managing calendar events and displaying dynamic charts, providing you with a platform to showcase advanced functionalities. This project is an excellent addition to your portfolio and a great talking point in job interviews.
 
 ## Project Objectives
@@ -11,7 +11,7 @@ The goal of this sprint is to explore and integrate various plugins often requir
   - **Calendar:** Manage events using a calendar plugin (e.g., FullCalendar).
   - **Charts:** Display dynamic data using Chartjs for various types of charts (e.g., bar and line charts).
 
-## Exercise Levels
+## 📋 Exercise Levels
 
 ### Level 1
 - **Exercise 1:**  
@@ -21,10 +21,9 @@ The goal of this sprint is to explore and integrate various plugins often requir
   - Charts  
   Set up the corresponding components and configure routing accordingly.
 
-|   |   |   |
-|---|---|---|
+| ![image](https://github.com/user-attachments/assets/1de2b83f-63ef-4f28-a0cf-528822e85cde) | ![image](https://github.com/user-attachments/assets/921335db-d8e7-484f-8fff-a689c05f3894) | ![image](https://github.com/user-attachments/assets/a91e8cd2-6765-467e-a5cf-b064fda6a2f0) |
+| --- | --- | --- |
 
-![image](https://github.com/user-attachments/assets/1de2b83f-63ef-4f28-a0cf-528822e85cde) | ![image](https://github.com/user-attachments/assets/921335db-d8e7-484f-8fff-a689c05f3894) | ![image](https://github.com/user-attachments/assets/a91e8cd2-6765-467e-a5cf-b064fda6a2f0)
 
 
 - **Exercise 2:**  
@@ -35,8 +34,9 @@ The goal of this sprint is to explore and integrate various plugins often requir
   - **FullCalendar:** Allow users to add and remove events.
   - **Chartjs:** Render at least two types of charts (e.g., a bar chart and a line chart) based on the stored data.
  
-| ![image](https://github.com/user-attachments/assets/d4cde270-8dbc-4903-9acc-325ed5e280d9) | ![image](https://github.com/user-attachments/assets/bb2819c4-6719-4e7a-a961-149c580f9308) |
+| ![image](https://github.com/user-attachments/assets/d4cde270-8dbc-4903-9acc-325ed5e280d9) | <img src="https://github.com/user-attachments/assets/bb2819c4-6719-4e7a-a961-149c580f9308" alt="image" width="600"> |
 | --- | --- |
+
  
 
 ### Level 2
@@ -48,9 +48,9 @@ The goal of this sprint is to explore and integrate various plugins often requir
 - **Exercise 5:**
   Enable editing of calendar events via a modal dialog. Ensure that the updated event data is sent to the API to update the database accordingly.
 
-![image](https://github.com/user-attachments/assets/3a42b7e8-723a-4d74-93e3-eb21d455c856)
+<img src="https://github.com/user-attachments/assets/3a42b7e8-723a-4d74-93e3-eb21d455c856" alt="image" width="600">
 
-## Technologies Used
+## 🚀 Technologies Used
 - **Angular:** Frontend development, components, and routing.
 - **NestJS:** Backend API development.
 - **MongoDB:** Database for data storage.
@@ -59,13 +59,13 @@ The goal of this sprint is to explore and integrate various plugins often requir
 - **TypeScript:** For both frontend and backend for strong typing.
 - **SASS/SCSS:** For styling and responsive design.
 
-## Requirements
+## 📋Requirements
 - NestJS
 - npm or yarn
 - Angular CLI
 - MongoDB
 
-## Deployment & Installation
+## 🌐 Deployment & Installation
 
 Installation and Setup:
 1. **Angular Application:**
@@ -85,7 +85,7 @@ Installation and Setup:
      npm run start:dev
    (The API will be available at http://localhost:3000/api or your configured port.)
 
-## Testing & Validation
+## ⚙️ Testing & Validation
 Key Test Cases:
 - **API Integration:**
   - Validate that the CRUD operations (create, read, update, delete) work correctly.
@@ -97,7 +97,7 @@ Key Test Cases:
 - **Unit Testing:**
   - Implement tests for key Angular components and NestJS API endpoints.
 
-## Final Notes
+## 💬Final Notes
 - **Be Creative:** This project is an excellent opportunity to showcase your ability to integrate multiple functionalities and develop complex features.
 - **Professional Portfolio:** Use this project to demonstrate your skills to potential employers.
 - **Enjoy the process and happy coding!** 🚀✨
