@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { inject } from '@angular/core';
 import { InfoPoint } from '../../shared/interfaces/infoPoint.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { InfoPoint } from '../../shared/interfaces/infoPoint.interface';
 export class InfoPointService {
 
  private http = inject(HttpClient)
- private apiUrl = 'http://localhost:3000/info-points';
+ private apiUrl = `${environment.apiUrl}/info-points`;
 
 
 

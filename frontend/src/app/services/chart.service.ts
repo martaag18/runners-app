@@ -4,13 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Runner } from '../../shared/runner.interface';
 import { AgeGroupStats } from '../../shared/runner.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChartService {
 
-  private apiUrl = 'http://localhost:3000/runners';
+  private apiUrl = `${environment.apiUrl}/runners`;
   private http = inject(HttpClient)
 
  

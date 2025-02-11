@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Register } from '../../shared/interfaces/register.interface';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { Register } from '../../shared/interfaces/register.interface';
 })
 export class SignUpService {
 
-  private API_URL = 'http://localhost:3000/register';
+  private API_URL = `${environment.apiUrl}/register`; 
   private http = inject(HttpClient);
 
   registerUser(data: Register) : Observable< {message: string }>{

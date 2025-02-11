@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { inject } from '@angular/core';
 import { Event } from '../../shared/interfaces/event.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,7 @@ import { Event } from '../../shared/interfaces/event.interface';
 export class EventService {
 
  private http = inject(HttpClient)
- private apiUrl = 'http://localhost:3000/events';
-
+ private apiUrl = `${environment.apiUrl}/events`;
 
  //Método para obtener eventos
 
