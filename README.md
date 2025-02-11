@@ -21,11 +21,10 @@ The goal of this sprint is to explore and integrate various plugins often requir
   - Charts  
   Set up the corresponding components and configure routing accordingly.
 
-![image](https://github.com/user-attachments/assets/1de2b83f-63ef-4f28-a0cf-528822e85cde)
-![image](https://github.com/user-attachments/assets/921335db-d8e7-484f-8fff-a689c05f3894)
-![image](https://github.com/user-attachments/assets/a91e8cd2-6765-467e-a5cf-b064fda6a2f0)
+|   |   |   |
+|---|---|---|
 
-
+![image](https://github.com/user-attachments/assets/1de2b83f-63ef-4f28-a0cf-528822e85cde) | ![image](https://github.com/user-attachments/assets/921335db-d8e7-484f-8fff-a689c05f3894) | ![image](https://github.com/user-attachments/assets/a91e8cd2-6765-467e-a5cf-b064fda6a2f0)
 
 
 - **Exercise 2:**  
@@ -35,9 +34,10 @@ The goal of this sprint is to explore and integrate various plugins often requir
   Integrate the following plugins:
   - **FullCalendar:** Allow users to add and remove events.
   - **Chartjs:** Render at least two types of charts (e.g., a bar chart and a line chart) based on the stored data.
-|   |   |  
-|---|---|
-  - ![image](https://github.com/user-attachments/assets/d4cde270-8dbc-4903-9acc-325ed5e280d9)  |  ![image](https://github.com/user-attachments/assets/bb2819c4-6719-4e7a-a961-149c580f9308)
+ 
+| ![image](https://github.com/user-attachments/assets/d4cde270-8dbc-4903-9acc-325ed5e280d9) | ![image](https://github.com/user-attachments/assets/bb2819c4-6719-4e7a-a961-149c580f9308) |
+| --- | --- |
+ 
 
 ### Level 2
 - **Exercise 4:**  
